@@ -1,19 +1,19 @@
 #include "Todo.h"
 #include <iostream>
+using std::string;
+using std::istream;
+using std::ostream;
+using std::ifstream;
+using std::ofstream;
+using std::endl;
+using std::cout;
 
 void todo(istream& in, ostream& out)
 {
+
 	ToDoStruct *toDo; //initialize the array type
-	ToDoStruct *doneToDo;//"	"
-
 	int size = 10; //Initial size is 10
-
-	int count = 0; //Count, for now it is zero
-
-	ofstream myLogging;
-
 	toDo = new ToDoStruct[size]; //Array of initial size 10 made of of toDoStruct defined in header
-	doneToDo = new ToDoStruct[size]; //Todostruct array of size 10 of completed tasks 
 
 	string start; //string variable for command to be read into 
 
@@ -34,11 +34,10 @@ void todo(istream& in, ostream& out)
 		string fileName;
 		string command;
 
-		//if the user specifies their own filename, open that txt file as ofstream, and get command 
+		//if the user specifies their own filename, use that txt file as ofstream, and get command 
 		if (temp == "-f")
 		{
 			in >> fileName;
-			myLogging.open(fileName.c_str());
 			in >> command;
 		}
 
@@ -46,11 +45,40 @@ void todo(istream& in, ostream& out)
 		else
 		{
 			fileName = "todo.txt";
-			myLogging.open(fileName.c_str());
 			command = temp;
 		}
 
+		if (command == "add")
+		{
+			string description; 
+			ToDoStruct addThis;
 
+			int listSize = load(toDo, fileName);
+
+			getline( in, description,'\n');
+			addThis.completed = false;
+			addThis.task = description;
+
+			toDo[listSize] = addThis;
+			
+			//save(toDo, fileName);
+		}
+
+		if (command == "list")
+		{
+			list(fileName, out);
+		}
+
+		if (command == "do")
+		{
+			int doThisTask;
+			in >> doThisTask;
+			int listSize = load(toDo, fileName);
+			toDo[doThisTask].completed = true;
+			//save(toDo, fileName);
+			
+
+		}
 
 		in >> start; // reprime
 	}

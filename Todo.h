@@ -3,14 +3,10 @@
 #include <string>
 #include <fstream>
 #include <string>
+//come back and move these
 using std::string;
 using std::istream;
 using std::ostream;
-using std::ifstream;
-using std::ofstream;
-using std::cin;
-using std::endl;
-using std::cout;
 
 #ifndef STRUCT_H
 #define STRUCT_H
@@ -30,3 +26,11 @@ struct ToDoStruct
 
 //todo.cpp 
 void todo(istream& in, ostream& out);
+
+//list.cpp
+void list(string fileName, ostream& out2);
+
+
+int load(ToDoStruct *&toDo, string file);
+
+void save(ToDoStruct toDo, string fileName);
