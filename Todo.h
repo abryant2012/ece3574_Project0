@@ -16,10 +16,10 @@ using std::ostream;
 struct ToDoStruct
 {
 	//boolean of whether the task has been completed or not
-	bool completed;
+	bool completed = false;
 
 	//String describing the task 
-	string task;
+	string task = "";
 };
 
 #endif
@@ -30,7 +30,8 @@ void todo(istream& in, ostream& out);
 //list.cpp
 void list(string fileName, ostream& out2);
 
-
+//Takes a todo list in a txt file and saves each task to an array made up of ToDoStructs 
 int load(ToDoStruct *&toDo, string file);
 
-void save(ToDoStruct toDo, string fileName);
+//Takes an array of ToDoStructs, and saves them in a text file. Also orders the tasks with incompleted tasks first. 
+void save(ToDoStruct *&toDo, string fileName, int listSize);

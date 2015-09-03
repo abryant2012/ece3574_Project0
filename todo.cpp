@@ -3,8 +3,6 @@
 using std::string;
 using std::istream;
 using std::ostream;
-using std::ifstream;
-using std::ofstream;
 using std::endl;
 using std::cout;
 
@@ -12,8 +10,7 @@ void todo(istream& in, ostream& out)
 {
 
 	ToDoStruct *toDo; //initialize the array type
-	int size = 10; //Initial size is 10
-	toDo = new ToDoStruct[size]; //Array of initial size 10 made of of toDoStruct defined in header
+	toDo = new ToDoStruct[20]; //Array of initial size 10 made of of toDoStruct defined in header
 
 	string start; //string variable for command to be read into 
 
@@ -48,6 +45,15 @@ void todo(istream& in, ostream& out)
 			command = temp;
 		}
 
+		//test that fileName and command variables are correct 
+		cout << "File:  " << fileName << endl;
+		cout << "Command:  " << command << endl;
+
+
+		/*
+		If the command is add, then use load to save the information on an array, 
+		add the new task as a toDoStruct to the end of the array, and save the file
+		*/
 		if (command == "add")
 		{
 			string description; 
@@ -56,28 +62,37 @@ void todo(istream& in, ostream& out)
 			int listSize = load(toDo, fileName);
 
 			getline( in, description,'\n');
-			addThis.completed = false;
-			addThis.task = description;
 
-			toDo[listSize] = addThis;
+			cout << description << endl;
+
+			toDo[listSize-1].completed = false;
+			toDo[listSize-1].task = description;
 			
-			//save(toDo, fileName);
+			save(toDo, fileName, listSize);
 		}
 
+		//If the command is list, call list, which uses out
 		if (command == "list")
 		{
 			list(fileName, out);
 		}
 
+
+		/*
+		If the command is do, take in the int position of the task, 
+		load the file into the array toDo, mark the task as completed, 
+		and save the file 
+		*/
+
 		if (command == "do")
 		{
+			int listSize = load(toDo, fileName);
+
 			int doThisTask;
 			in >> doThisTask;
-			int listSize = load(toDo, fileName);
-			toDo[doThisTask].completed = true;
-			//save(toDo, fileName);
-			
-
+		
+			toDo[doThisTask-1].completed = true;
+			save(toDo, fileName, listSize - 1);
 		}
 
 		in >> start; // reprime
