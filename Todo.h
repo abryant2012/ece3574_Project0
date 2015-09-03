@@ -35,3 +35,7 @@ int load(ToDoStruct *&toDo, string file);
 
 //Takes an array of ToDoStructs, and saves them in a text file. Also orders the tasks with incompleted tasks first. 
 void save(ToDoStruct *&toDo, string fileName, int listSize);
+
+void test_todo1();
+void test_todo2();
+void test_todo3();

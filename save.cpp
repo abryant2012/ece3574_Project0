@@ -3,15 +3,17 @@
 using std::string;
 using std::ofstream;
 using std::endl; 
-using std::cout;
 
 /*
-//Takes an array of ToDoStructs, and saves them in a text file. 
+Save file for Project0
+
+Takes an array of ToDoStructs, and saves them in a text file.
 Also Numbers the tasks and orders the tasks with incompleted tasks first.
+
+Andrew Bryant - andrewpb@vt.edu - 9/2/15
 */
 void save(ToDoStruct *&toDo, string fileName, int size)
 {
-	cout << "Saving " << endl;
 
 	ofstream logging; 
 	logging.open(fileName.c_str()); //////////////possibly remove out req
@@ -35,7 +37,6 @@ void save(ToDoStruct *&toDo, string fileName, int size)
 		string tempString;
 		if (toDo[i].completed == true)
 		{
-			cout << "i am done " << endl;
 			logging << count << ":[X]" << toDo[i].task << endl;
 			count++;
 		}

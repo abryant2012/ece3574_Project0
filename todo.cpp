@@ -1,13 +1,25 @@
 #include "Todo.h"
 #include <iostream>
+#include <assert.h>
 using std::string;
 using std::istream;
 using std::ostream;
 using std::endl;
-using std::cout;
+
+/*
+todo file for Project0
+
+Calls all other cpp files (other than main). Takes the input and calls the appropriate functions 
+
+Andrew Bryant - andrewpb@vt.edu - 9/2/15
+*/
 
 void todo(istream& in, ostream& out)
 {
+
+	test_todo1();
+	test_todo2();
+	test_todo3();
 
 	ToDoStruct *toDo; //initialize the array type
 	toDo = new ToDoStruct[20]; //Array of initial size 10 made of of toDoStruct defined in header
@@ -45,10 +57,6 @@ void todo(istream& in, ostream& out)
 			command = temp;
 		}
 
-		//test that fileName and command variables are correct 
-		cout << "File:  " << fileName << endl;
-		cout << "Command:  " << command << endl;
-
 
 		/*
 		If the command is add, then use load to save the information on an array, 
@@ -62,8 +70,6 @@ void todo(istream& in, ostream& out)
 			int listSize = load(toDo, fileName);
 
 			getline( in, description,'\n');
-
-			cout << description << endl;
 
 			toDo[listSize-1].completed = false;
 			toDo[listSize-1].task = description;
